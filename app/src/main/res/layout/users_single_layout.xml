@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_single_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+
+
+        android:layout_alignTop="@+id/use_single_textview1"
+        android:layout_marginStart="23dp"
+        android:src="@drawable/download" />
+
+    <TextView
+        android:id="@+id/use_single_textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Display Name"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/user_single_textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/use_single_textview1"
+        android:layout_marginTop="83dp"
+        android:text="User Default Status"
+        android:textColor="@color/common_google_signin_btn_text_light_pressed"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

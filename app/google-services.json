@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "216567678297",
+    "firebase_url": "https://logochat-347e6.firebaseio.com",
+    "project_id": "logochat-347e6",
+    "storage_bucket": "logochat-347e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216567678297:android:8ca0bb5a09949daa",
+        "android_client_info": {
+          "package_name": "com.example.hp.logo_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216567678297-3l8m6prl8k6smbkvgrlvhsnr1ff8jcd2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hp.logo_chat",
+            "certificate_hash": "7ea22637fe4234fc104c2ca487684d515a85216b"
+          }
+        },
+        {
+          "client_id": "216567678297-pb222kh6ia94tsivu8rk5krlf4plirkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS7K8BE12urWjq5opwFXWVEXzI10ziic8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216567678297-pb222kh6ia94tsivu8rk5krlf4plirkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
