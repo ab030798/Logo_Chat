@@ -1,7 +1,10 @@
 package com.example.hp.logo_chat;
 
 import android.app.ProgressDialog;
+import android.icu.text.DateFormat;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+
 public class ProfileActivity extends AppCompatActivity {
     private TextView e1;
     private  TextView e2;
@@ -30,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button bt;
     private DatabaseReference muserdatabase;
     private DatabaseReference mfriendsdtabase;
+    private  DatabaseReference mfrienddatabse;
     private FirebaseUser mCurrentUser;
     private ProgressDialog mprogrsdialouge;
     private String mCurrent_state;
@@ -43,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
        final String user_id = getIntent().getStringExtra("user_id");
        muserdatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
        mfriendsdtabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
+       mfrienddatabse = FirebaseDatabase.getInstance().getReference().child("Friends");
        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
        e1 =(TextView)findViewById(R.id.profiletextview1);
        e2 = (TextView) findViewById(R.id.profiletextview2);
@@ -115,6 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
            }
        });
        bt.setOnClickListener(new View.OnClickListener() {
+           @RequiresApi(api = Build.VERSION_CODES.N)
            @Override
            public void onClick(View v) {
                bt.setEnabled(false);
@@ -127,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity {
                                mfriendsdtabase.child(user_id).child(mCurrentUser.getUid()).child("request_type").setValue("received").addOnSuccessListener(new OnSuccessListener<Void>() {
                                    @Override
                                    public void onSuccess(Void aVoid) {
-                                       bt.setEnabled(true);
+
                                        mCurrent_state="req_sent";
                                        bt.setText("cancel friend request");
                                     //   Toast.makeText(ProfileActivity.this,"send succesfully",Toast.LENGTH_LONG).show();
@@ -139,6 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
                            else {
                                Toast.makeText(ProfileActivity.this,"fialed friend request",Toast.LENGTH_LONG).show();
                            }
+                           bt.setEnabled(true);
 
                        }
                    });
@@ -162,6 +171,42 @@ public class ProfileActivity extends AppCompatActivity {
 
                        }
                    });
+               }
+
+               if (mCurrent_state.equals("req_received")){
+                   final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
+
+                   mfrienddatabse.child(mCurrentUser.getUid()).child(user_id).setValue(currentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                       @Override
+                       public void onSuccess(Void aVoid) {
+                           mfrienddatabse.child(user_id).child(mCurrentUser.getUid()).setValue(currentDate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                               @Override
+                               public void onSuccess(Void aVoid) {
+
+                                   mfriendsdtabase.child(mCurrentUser.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+                                           mfriendsdtabase.child(user_id).child(mCurrentUser.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                               @Override
+                                               public void onSuccess(Void aVoid) {
+                                                   bt.setEnabled(true);
+                                                   mCurrent_state="Friends";
+                                                   bt.setText("Unfriend this person");
+
+                                               }
+                                           });
+
+
+
+                                       }
+                                   });
+
+                               }
+                           });
+
+                       }
+                   });
+
                }
 
            }
